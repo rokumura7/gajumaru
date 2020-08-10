@@ -9,7 +9,9 @@ import { Page } from 'puppeteer'
   const book = []
   for (let i = 1; i <= list.length; i++) {
     const title = await page.$eval(`.rank_list:nth-child(${i})  .list_title > span`, elm => elm.textContent)
+    const author = await page.$eval(`.rank_list:nth-child(${i})  div.author_name`, elm => elm.textContent)
     console.log(title)
+    console.log(author)
   }
   await browser.close()
 })()
