@@ -5,12 +5,18 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require ts-node/register --watch-extensions ts \"test/**/*.ts\""
   },
   "author": "rokumura",
   "license": "ISC",
   "dependencies": {
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.1",
     "@types/puppeteer": "^3.0.1",
-    "puppeteer": "^5.2.1"
+    "chai": "^4.2.0",
+    "mocha": "^8.1.1",
+    "puppeteer": "^5.2.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   }
 }
