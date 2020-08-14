@@ -1,12 +1,13 @@
-import puppeteer from 'puppeteer'
+import puppeteer, { Page } from 'puppeteer'
 import SELECTORS from './selectors'
 import * as utils from '../../util/utils'
 import Book from '../../model/book'
-import { of as _title } from '../../model/vo/book/title'
-import { of as _author } from '../../model/vo/book/author'
-import { of as _price } from '../../model/vo/book/price'
-import { of as _publisher } from '../../model/vo/book/publisher'
-import { of as _isbn } from '../../model/vo/book/isbn'
+import { Title } from '../../model/vo/book/title'
+import { Author } from '../../model/vo/book/author'
+import { Price } from '../../model/vo/book/price'
+import { Publisher } from '../../model/vo/book/publisher'
+import { ISBN } from '../../model/vo/book/isbn'
+import of from '../../model/vo/generator'
 
 (async () => {
   const browser = await puppeteer.launch()
@@ -15,17 +16,17 @@ import { of as _isbn } from '../../model/vo/book/isbn'
   const list = await page.$$(SELECTORS.RANK_LIST)
   const books: Book[] = []
   for (let i = 1; i <= list.length; i++) {
-    const title = _title(await page.$eval(utils.replaceIndex(SELECTORS.TITLE, i), elm => elm.textContent))
-    const author = _author(await page.$eval(utils.replaceIndex(SELECTORS.AUTHOR, i), elm => elm.textContent))
-    const price = _price(await page.$eval(utils.replaceIndex(SELECTORS.PRICE, i), elm => elm.textContent))
-    const publisher = _publisher(await page.$eval(utils.replaceIndex(SELECTORS.PUBLISHER, i), elm => elm.textContent))
-    const isbn = _isbn(await page.$eval(utils.replaceIndex(SELECTORS.ISBN, i), elm => elm.textContent))
+    const title = await page.$eval(utils.replaceIndex(SELECTORS.TITLE, i), elm => elm.textContent)
+    const author = await page.$eval(utils.replaceIndex(SELECTORS.AUTHOR, i), elm => elm.textContent)
+    const price = await page.$eval(utils.replaceIndex(SELECTORS.PRICE, i), elm => elm.textContent)
+    const publisher = await page.$eval(utils.replaceIndex(SELECTORS.PUBLISHER, i), elm => elm.textContent)
+    const isbn = await page.$eval(utils.replaceIndex(SELECTORS.ISBN, i), elm => elm.textContent)
     const book: Book = {
-      title: title,
-      author: author,
-      price: price,
-      publisher: publisher,
-      isbn: isbn
+      title: of<Title>(title),
+      author: of<Author>(author),
+      price: of<Price>(price),
+      publisher: of<Publisher>(publisher),
+      isbn: of<ISBN>(isbn)
     }
     books.push(book)
   }
