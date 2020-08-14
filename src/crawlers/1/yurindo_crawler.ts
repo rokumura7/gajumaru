@@ -4,6 +4,7 @@ import { replaceIndex as r } from '../../util/utils'
 import Book from '../../model/book'
 import { RPage } from '../../lib/rpage'
 import { Title, Author, Price, Publisher, ISBN } from '../../model/vo/book'
+import { post } from '../../notify/slack'
 
 (async () => {
   const browser = await puppeteer.launch()
@@ -27,6 +28,9 @@ import { Title, Author, Price, Publisher, ISBN } from '../../model/vo/book'
     }
     books.push(book)
   }
-  console.log(books)
+  const message = books
+    .map(b => `[${b.title}] by ${b.author}`)
+    .reduce((b1, b2) => b1 + '\n' + b2)
+  await post(message)
   await browser.close()
 })()
