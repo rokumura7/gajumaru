@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer'
 import Selectors from './selectors'
-import * as utils from '../../util/utils'
+import { replaceIndex as r } from '../../util/utils'
 import Book from '../../model/book'
 import { RPage } from '../../lib/rpage'
 import { Title, Author, Price, Publisher, ISBN } from '../../model/vo/book'
@@ -13,11 +13,11 @@ import { Title, Author, Price, Publisher, ISBN } from '../../model/vo/book'
   const list = await page.$$(Selectors.RANK_LIST)
   const books: Book[] = []
   for (let i = 1; i <= list.length; i++) {
-    const title = await page.elm<Title>(utils.replaceIndex(Selectors.TITLE, i))
-    const author = await page.elm<Author>(utils.replaceIndex(Selectors.AUTHOR, i))
-    const price = await page.elm<Price>(utils.replaceIndex(Selectors.PRICE, i))
-    const publisher = await page.elm<Publisher>(utils.replaceIndex(Selectors.PUBLISHER, i))
-    const isbn = await page.elm<ISBN>(utils.replaceIndex(Selectors.ISBN, i))
+    const title = await page.elm<Title>(r(Selectors.TITLE, i))
+    const author = await page.elm<Author>(r(Selectors.AUTHOR, i))
+    const price = await page.elm<Price>(r(Selectors.PRICE, i))
+    const publisher = await page.elm<Publisher>(r(Selectors.PUBLISHER, i))
+    const isbn = await page.elm<ISBN>(r(Selectors.ISBN, i))
     const book: Book = {
       title: title,
       author: author,
