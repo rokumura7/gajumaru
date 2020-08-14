@@ -1,8 +1,4 @@
-import { Title } from "./vo/book/title"
-import { Author } from "./vo/book/author"
-import { Price } from "./vo/book/price"
-import { Publisher } from "./vo/book/publisher"
-import { ISBN } from "./vo/book/isbn"
+import { Title, Author, Price, Publisher, ISBN } from "./vo/book"
 
 export default interface Book {
   title: Title

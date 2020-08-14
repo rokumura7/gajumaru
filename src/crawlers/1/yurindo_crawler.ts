@@ -2,12 +2,8 @@ import puppeteer from 'puppeteer'
 import Selectors from './selectors'
 import * as utils from '../../util/utils'
 import Book from '../../model/book'
-import { Title } from '../../model/vo/book/title'
-import { Author } from '../../model/vo/book/author'
-import { Price } from '../../model/vo/book/price'
-import { Publisher } from '../../model/vo/book/publisher'
-import { ISBN } from '../../model/vo/book/isbn'
 import { RPage } from '../../lib/rpage'
+import { Title, Author, Price, Publisher, ISBN } from '../../model/vo/book'
 
 (async () => {
   const browser = await puppeteer.launch()
