@@ -4,13 +4,15 @@ import { replaceIndex as r } from '../../util/utils'
 import Book from '../../model/book'
 import { RPage } from '../../lib/rpage'
 import { Title, Author, Price, Publisher, ISBN } from '../../model/vo/book'
-import { post } from '../../notify/slack'
+import { post, SlackBody } from '../../notify/slack'
 
 (async () => {
   const browser = await puppeteer.launch()
   const _page = await browser.newPage()
   const page = new RPage(_page)
-  await page.goto('https://www.yurindo.co.jp/ranking/week-all').then(() => page.waitFor(1000))
+  await page.goto('https://www.yurindo.co.jp/ranking/week-all')
+    .then(() => page.waitFor(1000))
+
   const list = await page.$$(Selectors.RANK_LIST)
   const books: Book[] = []
   for (let i = 1; i <= list.length; i++) {
@@ -28,9 +30,12 @@ import { post } from '../../notify/slack'
     }
     books.push(book)
   }
+
   const message = books
     .map(b => `[${b.title}] by ${b.author}`)
     .reduce((b1, b2) => b1 + '\n' + b2)
-  await post(message)
+  const body = new SlackBody(message)
+  await post(body)
+
   await browser.close()
 })()
