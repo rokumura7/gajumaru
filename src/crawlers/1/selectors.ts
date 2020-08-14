@@ -5,4 +5,4 @@ export default {
   PRICE: '.rank_list:nth-child(_INDEX) .price',
   PUBLISHER: '.rank_list:nth-child(_INDEX) .publisher',
   ISBN: '.rank_list:nth-child(_INDEX) .isbn'
-}
+} as const

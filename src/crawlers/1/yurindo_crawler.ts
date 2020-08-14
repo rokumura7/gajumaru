@@ -1,5 +1,5 @@
-import puppeteer, { Page } from 'puppeteer'
-import SELECTORS from './selectors'
+import puppeteer from 'puppeteer'
+import Selectors from './selectors'
 import * as utils from '../../util/utils'
 import Book from '../../model/book'
 import { Title } from '../../model/vo/book/title'
@@ -7,30 +7,27 @@ import { Author } from '../../model/vo/book/author'
 import { Price } from '../../model/vo/book/price'
 import { Publisher } from '../../model/vo/book/publisher'
 import { ISBN } from '../../model/vo/book/isbn'
-import of from '../../model/vo/generator'
-
-const text = async (page: Page, selector: string, i: number): Promise<string | null> => {
-  return await page.$eval(utils.replaceIndex(selector, i), elm => elm.textContent)
-}
+import { RPage } from '../../lib/rpage'
 
 (async () => {
   const browser = await puppeteer.launch()
-  const page = await browser.newPage()
+  const _page = await browser.newPage()
+  const page = new RPage(_page)
   await page.goto('https://www.yurindo.co.jp/ranking/week-all').then(() => page.waitFor(1000))
-  const list = await page.$$(SELECTORS.RANK_LIST)
+  const list = await page.$$(Selectors.RANK_LIST)
   const books: Book[] = []
   for (let i = 1; i <= list.length; i++) {
-    const title = await text(page, SELECTORS.TITLE, i)
-    const author = await text(page, SELECTORS.AUTHOR, i)
-    const price = await text(page, SELECTORS.PRICE, i)
-    const publisher = await text(page, SELECTORS.PUBLISHER, i)
-    const isbn = await text(page, SELECTORS.ISBN, i)
+    const title = await page.elm<Title>(utils.replaceIndex(Selectors.TITLE, i))
+    const author = await page.elm<Author>(utils.replaceIndex(Selectors.AUTHOR, i))
+    const price = await page.elm<Price>(utils.replaceIndex(Selectors.PRICE, i))
+    const publisher = await page.elm<Publisher>(utils.replaceIndex(Selectors.PUBLISHER, i))
+    const isbn = await page.elm<ISBN>(utils.replaceIndex(Selectors.ISBN, i))
     const book: Book = {
-      title: of<Title>(title),
-      author: of<Author>(author),
-      price: of<Price>(price),
-      publisher: of<Publisher>(publisher),
-      isbn: of<ISBN>(isbn)
+      title: title,
+      author: author,
+      price: price,
+      publisher: publisher,
+      isbn: isbn
     }
     books.push(book)
   }
