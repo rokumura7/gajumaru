@@ -15,7 +15,6 @@ export abstract class BaseCrawler implements Crawler {
     const page = new RPage(_page)
     const books = await this.crawl(browser, page)
     await browser.close()
-    console.log(books)
     await this.notify(books)
     return new Promise(() => {})
   }

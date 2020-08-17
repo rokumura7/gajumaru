@@ -19,7 +19,7 @@ class RPage implements RPage {
     }
   }
 
-  elm = async <T>(selector: string): Promise<T> => {
+  async elm<T>(selector: string): Promise<T> {
     return of(await this.page.$eval(selector, elm => elm.textContent))
   }
 }

@@ -15,7 +15,7 @@ export class SlackBody {
     )
   }
 
-  addAttachment = (title: string, message: string) => {
+  addAttachment(title: string, message: string): void {
     this.sections.push({ "type": "divider" })
     this.sections.push(
       {
@@ -28,7 +28,7 @@ export class SlackBody {
     )
   }
 
-  build = (): {} => {
+  build(): {} {
     const blocks: {}[] = [
       {
         "type": "section",

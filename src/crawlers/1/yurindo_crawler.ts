@@ -28,6 +28,6 @@ export default class YurindoCrawler extends BaseCrawler {
       }
       books.push(book)
     }
-    return new Promise(() => books)
+    return new Promise((resolve) => resolve(books))
   }
 }
