@@ -7,7 +7,7 @@ import { Title, Author, Price, Publisher, ISBN } from '../../model/vo/book'
 import { BaseCrawler } from '../crawler'
 
 export default class YurindoCrawler extends BaseCrawler {
-  protected async crawl(browser: Browser, page: RPage): Promise<Book[]> {
+  protected async crawl(_: Browser, page: RPage): Promise<Book[]> {
     await page.goto('https://www.yurindo.co.jp/ranking/week-all')
       .then(() => page.waitFor(1000))
 

@@ -15,7 +15,7 @@ export class SlackBody {
     )
   }
 
-  addAttachment(title: string, message: string): void {
+  addAttachment(message: string): void {
     this.sections.push({ "type": "divider" })
     this.sections.push(
       {
