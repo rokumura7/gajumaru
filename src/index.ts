@@ -1,6 +1,6 @@
-import YurindoCrawler from "./crawlers/1/yurindo_crawler"
+import YurindoCrawler from "./crawlers/1/yurindo_crawler";
 
 (async () => {
-  const crawler = new YurindoCrawler()
-  await crawler.run()
-})()
+  const crawler = new YurindoCrawler();
+  await crawler.run();
+})();
