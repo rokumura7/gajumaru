@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Page } from "puppeteer";
-import of from "../model/vo/generator";
+import { Page } from 'puppeteer';
+import of from '../model/vo/generator';
 
 interface RPage extends Page {
   elm<T>(selector: string): Promise<T>;

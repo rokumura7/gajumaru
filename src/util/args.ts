@@ -1,4 +1,4 @@
-import yargs from "yargs";
+import yargs from 'yargs';
 
 export interface Args {
   slack: boolean;
@@ -7,6 +7,6 @@ export interface Args {
 
 export const args = (): Args =>
   yargs.options({
-    slack: { alias: "s", type: "boolean", default: true },
-    crawler: { alias: "c", type: "number", demandOption: true },
+    slack: { alias: 's', type: 'boolean', default: true },
+    crawler: { alias: 'c', type: 'number', demandOption: true },
   }).argv;

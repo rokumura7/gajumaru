@@ -15,5 +15,12 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "rules": {}
+  "rules": {
+    "prettier/prettier": [
+      "error", {
+        "singleQuote": true,
+        "trailingComma": "es5"
+      }
+    ]
+  }
 }

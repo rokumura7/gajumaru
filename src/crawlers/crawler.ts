@@ -1,8 +1,8 @@
-import puppeteer, { Browser } from "puppeteer";
-import Book from "../model/book";
-import { RPage } from "../lib/rpage";
-import { SlackBody, post } from "../notify/slack";
-import { Args } from "../util/args";
+import puppeteer, { Browser } from 'puppeteer';
+import Book from '../model/book';
+import { RPage } from '../lib/rpage';
+import { SlackBody, post } from '../notify/slack';
+import { Args } from '../util/args';
 
 export interface Crawler {
   run(): Promise<void>;
@@ -27,7 +27,7 @@ export abstract class BaseCrawler implements Crawler {
   protected async notify(books: Book[]): Promise<void> {
     const message = books
       .map((b) => `[${b.title}] by ${b.author}`)
-      .reduce((b1, b2) => b1 + "\n" + b2);
+      .reduce((b1, b2) => b1 + '\n' + b2);
     if (this.willNotify) {
       const body = new SlackBody(message);
       await post(body);

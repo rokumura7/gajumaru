@@ -1,5 +1,5 @@
-import { args } from "./util/args";
-import launcher from "./crawlers/launcher";
+import { args } from './util/args';
+import launcher from './crawlers/launcher';
 
 (async () => {
   const launchOpts = args();
