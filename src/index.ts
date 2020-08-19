@@ -1,6 +1,8 @@
-import YurindoCrawler from "./crawlers/1/yurindo_crawler";
+import { args } from "./util/args";
+import launcher from "./crawlers/launcher";
 
 (async () => {
-  const crawler = new YurindoCrawler();
+  const launchOpts = args();
+  const crawler = launcher(launchOpts);
   await crawler.run();
 })();
