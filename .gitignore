@@ -29,3 +29,5 @@ bin/*
 *.csv
 *.properties
 .idea
+# Ignore Gradle project-specific cache directory
+.gradle
