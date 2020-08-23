@@ -1,14 +1,17 @@
 package gajumaru_api.controller;
 
+import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("api/ranking")
 public class RankingController {
 
-  @RequestMapping(value = "/ranking", method = RequestMethod.POST)
-  public String post() {
+  @PostMapping
+  public String post(@RequestBody HttpRequest req) {
     return "OK";
   }
 }
