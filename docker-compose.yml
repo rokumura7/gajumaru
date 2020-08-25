@@ -1,0 +1,12 @@
+version: '2'
+services:
+  gajumaru_api:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+       - .:/app
+    environment:
+      JAR_TARGET: gajumaru_api-0.0.1-SNAPSHOT.jar

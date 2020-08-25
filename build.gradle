@@ -1,8 +1,8 @@
-def applicationVersion = project.properties['release.version']
+def applicationVersion = "0.0.1-SNAPSHOT"
 version = applicationVersion
 
 apply plugin: 'java'
-def javaVersion = JavaVersion.VERSION_1_10
+def javaVersion = JavaVersion.VERSION_1_8
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
@@ -20,6 +20,9 @@ dependencies {
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junitVersion
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitVersion
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: junitVersion
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-devtools'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
@@ -57,10 +60,4 @@ bootJar {
 bootWar {
     baseName = springBootApplicationName
     version = applicationVersion
-}
-
-dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-devtools'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
