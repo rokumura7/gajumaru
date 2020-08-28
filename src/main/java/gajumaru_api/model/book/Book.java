@@ -56,4 +56,28 @@ public class Book {
       return new Book(this);
     }
   }
+
+  public gajumaru_api.model.vo.book.Id getId() {
+    return this.id;
+  }
+
+  public Title getTitle() {
+    return this.title;
+  }
+
+  public Isbn getIsbn() {
+    return this.isbn;
+  }
+
+  public Price getPrice() {
+    return this.price;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Book book = (Book) obj;
+    return book.id.equals(this.id);
+  }
 }
