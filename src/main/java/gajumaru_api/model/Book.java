@@ -1,4 +1,4 @@
-package gajumaru_api.model.book;
+package gajumaru_api.model;
 
 import gajumaru_api.model.vo.book.Isbn;
 import gajumaru_api.model.vo.book.Price;
