@@ -1,8 +1,8 @@
 package gajumaru_api.model.vo.book;
 
-import gajumaru_api.model.vo.IntValueObject;
+import gajumaru_api.model.vo.IdentifiableValueObject;
 
-public final class Id extends IntValueObject {
+public final class Id extends IdentifiableValueObject {
 
   private Id(int value) {
     super(value);

@@ -4,7 +4,7 @@ import gajumaru_api.model.vo.book.Isbn;
 import gajumaru_api.model.vo.book.Price;
 import gajumaru_api.model.vo.book.Title;
 
-public class Book {
+public class Book extends IdentifiableModel {
   private gajumaru_api.model.vo.book.Id id;
   private Title title;
   private Isbn isbn;
@@ -71,13 +71,5 @@ public class Book {
 
   public Price getPrice() {
     return this.price;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == this) return true;
-    if (obj == null || getClass() != obj.getClass()) return false;
-    Book book = (Book) obj;
-    return book.id.equals(this.id);
   }
 }
