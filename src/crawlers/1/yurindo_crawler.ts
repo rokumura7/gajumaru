@@ -1,7 +1,7 @@
 import { Browser } from 'puppeteer';
 import Selectors from './selectors';
 import { replaceIndex as r } from '../../util/utils';
-import Book from '../../model/book';
+import { Book, BookBuilder } from '../../model/book';
 import { RPage } from '../../lib/rpage';
 import { Title, Author, Price, Publisher, ISBN } from '../../model/vo/book';
 import { BaseCrawler } from '../crawler';
@@ -20,13 +20,15 @@ export default class YurindoCrawler extends BaseCrawler {
       const price = await page.elm<Price>(r(Selectors.PRICE, i));
       const publisher = await page.elm<Publisher>(r(Selectors.PUBLISHER, i));
       const isbn = await page.elm<ISBN>(r(Selectors.ISBN, i));
-      const book: Book = {
-        title: title,
-        author: author,
-        price: price,
-        publisher: publisher,
-        isbn: isbn,
-      };
+
+      const builder = new BookBuilder();
+      const book: Book = builder
+        .title(title)
+        .author(author)
+        .price(price)
+        .publisher(publisher)
+        .isbn(isbn)
+        .build()
       books.push(book);
     }
     return new Promise((resolve) => resolve(books));

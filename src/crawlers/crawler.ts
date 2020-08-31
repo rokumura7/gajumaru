@@ -1,5 +1,5 @@
 import puppeteer, { Browser } from 'puppeteer';
-import Book from '../model/book';
+import { Book } from '../model/book';
 import { RPage } from '../lib/rpage';
 import { SlackBody, post } from '../notify/slack';
 import { Args } from '../util/args';
