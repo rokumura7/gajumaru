@@ -15,7 +15,7 @@
 `node target/index.js [ options ]`
 
 e.g.  
-`node target/index.js -c 1 --slack false`
+`node target/src/index.js -c 1 --slack false`
 
 ### options
 

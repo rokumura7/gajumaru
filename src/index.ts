@@ -2,7 +2,12 @@ import { args } from './util/args';
 import launcher from './crawlers/launcher';
 
 (async () => {
-  const launchOpts = args();
-  const crawler = launcher(launchOpts);
-  await crawler.run();
+  try {
+    const launchOpts = args();
+    const crawler = launcher(launchOpts);
+    await crawler.run();
+  } catch (error) {
+    console.log(error);
+    process.exit();
+  }
 })();
