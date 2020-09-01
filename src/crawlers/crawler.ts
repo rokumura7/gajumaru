@@ -1,7 +1,7 @@
 import puppeteer, { Browser } from 'puppeteer';
 import { Book } from '../model/book';
 import { RPage } from '../lib/rpage';
-import { SlackBody, post } from '../notify/slack';
+import { SlackBodyBuilder, post } from '../notify/slack';
 import { Args } from '../util/args';
 
 export interface Crawler {
@@ -29,7 +29,7 @@ export abstract class BaseCrawler implements Crawler {
       .map((b) => `[${b.title}] by ${b.author}`)
       .reduce((b1, b2) => b1 + '\n' + b2);
     if (this.willNotify) {
-      const body = new SlackBody(message);
+      const body = new SlackBodyBuilder(message);
       await post(body);
     } else {
       console.log(message);

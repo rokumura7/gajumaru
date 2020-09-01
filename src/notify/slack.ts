@@ -1,8 +1,21 @@
 import axios, { AxiosResponse } from 'axios';
 import * as dotenv from 'dotenv';
 
-export class SlackBody {
-  sections: { [key: string]: string | { [key: string]: string } }[] = [];
+export interface SlackBlock {
+  type: string;
+  text: {
+    type: string;
+    text: string;
+  };
+}
+
+export interface SlackBody {
+  channel: string;
+  blocks: SlackBlock[];
+}
+
+export class SlackBodyBuilder {
+  sections: SlackBlock[] = [];
   constructor(message: string) {
     this.sections.push({
       type: 'section',
@@ -14,7 +27,6 @@ export class SlackBody {
   }
 
   addAttachment(message: string): void {
-    this.sections.push({ type: 'divider' });
     this.sections.push({
       type: 'section',
       text: {
@@ -24,8 +36,8 @@ export class SlackBody {
     });
   }
 
-  build(): { blocks: { [key: string]: string | { [key: string]: string } }[] } {
-    const _blocks: { [key: string]: string | { [key: string]: string } }[] = [
+  build(): SlackBody {
+    const _blocks: SlackBlock[] = [
       {
         type: 'section',
         text: {
@@ -33,21 +45,25 @@ export class SlackBody {
           text: 'Here is *the Weekly Book Ranking* below.',
         },
       },
-      { type: 'divider' },
     ];
     this.sections.forEach((s) => _blocks.push(s));
-    return { blocks: _blocks };
+    return {
+      channel: process.env.SLACK_WEBHOOK_CHANNEL
+        ? process.env.SLACK_WEBHOOK_CHANNEL
+        : '',
+      blocks: _blocks,
+    };
   }
 }
 
 export const post = async (
-  body: SlackBody
+  builder: SlackBodyBuilder
 ): Promise<AxiosResponse<unknown>> | never => {
   dotenv.config();
   const headers = {
     'Content-Type': 'application/json',
   };
-  const payload = body.build();
+  const payload = builder.build();
   if (typeof process.env.SLACK_WEBHOOK_URL === 'string')
     return await axios.post(process.env.SLACK_WEBHOOK_URL, payload, {
       headers: headers,
