@@ -2,7 +2,7 @@ package gajumaru_api.model.vo.book;
 
 import gajumaru_api.model.vo.StringValueObject;
 
-public class Isbn extends StringValueObject {
+public final class Isbn extends StringValueObject {
   private Isbn(String value) {
     super(value);
   }

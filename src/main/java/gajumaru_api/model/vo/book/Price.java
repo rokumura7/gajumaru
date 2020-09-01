@@ -2,7 +2,7 @@ package gajumaru_api.model.vo.book;
 
 import gajumaru_api.model.vo.IntValueObject;
 
-public class Price extends IntValueObject {
+public final class Price extends IntValueObject {
   private Price(int value) {
     super(value);
   }

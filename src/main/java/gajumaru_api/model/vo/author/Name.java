@@ -2,7 +2,7 @@ package gajumaru_api.model.vo.author;
 
 import gajumaru_api.model.vo.StringValueObject;
 
-public class Name extends StringValueObject {
+public final class Name extends StringValueObject {
 
   private Name(String value) {
     super(value);
