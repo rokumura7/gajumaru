@@ -50,9 +50,7 @@ public class Book extends IdentifiableModel {
     }
 
     Book build() {
-      if (title == null || isbn == null) {
-        throw new NullPointerException();
-      }
+      if (title == null || isbn == null) throw new NullPointerException();
       return new Book(this);
     }
   }
