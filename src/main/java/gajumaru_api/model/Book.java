@@ -57,6 +57,7 @@ public class Book extends IdentifiableModel {
     }
   }
 
+  @Override
   public gajumaru_api.model.vo.book.Id getId() {
     return this.id;
   }
