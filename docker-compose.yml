@@ -10,3 +10,19 @@ services:
        - .:/app
     environment:
       JAR_TARGET: gajumaru_api-0.0.1-SNAPSHOT.jar
+    depends_on:
+      - gajumaru_mysql
+  gajumaru_mysql:
+    build: ./docker/mysql
+    container_name: gajumaru_mysql
+    volumes:
+      - ./logs/mysql:/var/log/mysql
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: gajumaru
+      MYSQL_USER: gajumaru
+      MYSQL_PASSWORD: gajumaru
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Tokyo
+    ports:
+      - 4406:3306
