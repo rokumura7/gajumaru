@@ -10,12 +10,10 @@ export interface Book {
 
 export class BookBuilder {
   private _title: Title | null = null;
-  private _author: Author | null = null
-  private _price: Price | null = null
-  private _publisher: Publisher | null = null
-  private _isbn: ISBN | null = null
-
-  constructor() {}
+  private _author: Author | null = null;
+  private _price: Price | null = null;
+  private _publisher: Publisher | null = null;
+  private _isbn: ISBN | null = null;
 
   title(_title: Title): BookBuilder {
     this._title = _title;
@@ -32,7 +30,7 @@ export class BookBuilder {
     return this;
   }
 
-  publisher(_publisher: Publisher) {
+  publisher(_publisher: Publisher): BookBuilder {
     this._publisher = _publisher;
     return this;
   }
@@ -43,18 +41,20 @@ export class BookBuilder {
   }
 
   build(): Book {
-    if (this._title == null
-      || this._author == null
-      || this._price == null
-      || this._publisher == null
-      || this._isbn == null
-    ) throw new Error("missing args.")
+    if (
+      this._title == null ||
+      this._author == null ||
+      this._price == null ||
+      this._publisher == null ||
+      this._isbn == null
+    )
+      throw new Error('missing args.');
     return {
       title: this._title,
       author: this._author,
       price: this._price,
       publisher: this._publisher,
       isbn: this._isbn,
-    }
+    };
   }
 }

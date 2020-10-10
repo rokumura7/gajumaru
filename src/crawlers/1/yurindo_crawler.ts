@@ -28,7 +28,7 @@ export default class YurindoCrawler extends BaseCrawler {
         .price(price)
         .publisher(publisher)
         .isbn(isbn)
-        .build()
+        .build();
       books.push(book);
     }
     return new Promise((resolve) => resolve(books));
