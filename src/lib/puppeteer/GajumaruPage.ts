@@ -2,11 +2,11 @@
 import { Page } from 'puppeteer';
 import of from '../model/vo/Generator';
 
-interface RPage extends Page {
+interface GajumaruPage extends Page {
   elm<T>(selector: string): Promise<T>;
 }
 
-class RPage implements RPage {
+class GajumaruPage implements GajumaruPage {
   page: Page;
 
   constructor(_page: Page) {
@@ -17,7 +17,7 @@ class RPage implements RPage {
           (this as any)[key] !== undefined
             ? (this as any)[key]
             : (target as any)[key],
-      }) as RPage;
+      }) as GajumaruPage;
     }
   }
 
@@ -26,4 +26,4 @@ class RPage implements RPage {
   }
 }
 
-export { RPage };
+export default GajumaruPage;

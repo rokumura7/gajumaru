@@ -1,6 +1,6 @@
 import puppeteer, { Browser } from 'puppeteer';
 import { Book } from '../lib/model/Book';
-import { RPage } from '../lib/puppeteer/GajumaruPage';
+import GajumaruPage from '../lib/puppeteer/GajumaruPage';
 import { SlackBodyBuilder, post } from '../lib/notify/Slack';
 import { Args } from '../lib/util/Args';
 
@@ -18,7 +18,7 @@ export abstract class BaseCrawler implements Crawler {
   async run(): Promise<void> {
     const browser = await puppeteer.launch();
     const _page = await browser.newPage();
-    const page = new RPage(_page);
+    const page = new GajumaruPage(_page);
     const books = await this.crawl(browser, page);
     await browser.close();
     await this.notify(books);
@@ -36,5 +36,8 @@ export abstract class BaseCrawler implements Crawler {
     }
   }
 
-  protected abstract crawl(browser: Browser, page: RPage): Promise<Book[]>;
+  protected abstract crawl(
+    browser: Browser,
+    page: GajumaruPage
+  ): Promise<Book[]>;
 }
