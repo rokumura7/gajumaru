@@ -1,6 +1,6 @@
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
-import * as utils from '../../src/util/utils';
+import * as utils from '../../../src/lib/util/Utils';
 
 describe('Test for utils.ts', () => {
   it('replaceIndex', () =>

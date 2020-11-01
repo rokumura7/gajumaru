@@ -1,8 +1,8 @@
 import puppeteer, { Browser } from 'puppeteer';
-import { Book } from '../model/book';
-import { RPage } from '../lib/rpage';
-import { SlackBodyBuilder, post } from '../notify/slack';
-import { Args } from '../util/args';
+import { Book } from '../lib/model/Book';
+import { RPage } from '../lib/puppeteer/GajumaruPage';
+import { SlackBodyBuilder, post } from '../lib/notify/Slack';
+import { Args } from '../lib/util/Args';
 
 export interface Crawler {
   run(): Promise<void>;

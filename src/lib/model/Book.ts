@@ -1,4 +1,4 @@
-import { Title, Author, Price, Publisher, ISBN } from './vo/book';
+import { Title, Author, Price, Publisher, ISBN } from './vo/Book';
 
 export interface Book {
   title: Title;

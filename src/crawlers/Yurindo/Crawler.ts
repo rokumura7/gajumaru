@@ -1,10 +1,10 @@
 import { Browser } from 'puppeteer';
-import Selectors from './selectors';
-import { replaceIndex as r } from '../../util/utils';
-import { Book, BookBuilder } from '../../model/book';
-import { RPage } from '../../lib/rpage';
-import { Title, Author, Price, Publisher, ISBN } from '../../model/vo/book';
-import { BaseCrawler } from '../crawler';
+import Selectors from './Selectors';
+import { replaceIndex as r } from '../../lib/util/Utils';
+import { Book, BookBuilder } from '../../lib/model/Book';
+import { RPage } from '../../lib/puppeteer/GajumaruPage';
+import { Title, Author, Price, Publisher, ISBN } from '../../lib/model/vo/Book';
+import { BaseCrawler } from '../Crawler';
 
 export default class YurindoCrawler extends BaseCrawler {
   protected async crawl(_: Browser, page: RPage): Promise<Book[]> {
