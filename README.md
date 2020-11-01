@@ -22,7 +22,6 @@ e.g.
 |alias|default|require|
 |:--:|:--:|:--:|
 |slack|false||
-|crawler||o|
 
 ## test
 
