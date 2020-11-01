@@ -7,6 +7,6 @@ export interface Args {
 
 export const args = (): Args =>
   yargs.options({
-    slack: { alias: 's', type: 'boolean', default: true },
+    slack: { alias: 's', type: 'boolean', default: false },
     crawler: { alias: 'c', type: 'number', demandOption: true },
   }).argv;
