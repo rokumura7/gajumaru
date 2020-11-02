@@ -2,7 +2,7 @@ import puppeteer, { Browser } from 'puppeteer';
 import { Book } from '../lib/model/Book';
 import GajumaruPage from '../lib/puppeteer/GajumaruPage';
 import { SlackBodyBuilder, post } from '../lib/notify/Slack';
-import { Args } from '../lib/util/Args';
+import { args } from '../lib/util/Args';
 
 export interface Crawler {
   run(): Promise<void>;
@@ -11,8 +11,8 @@ export interface Crawler {
 export abstract class BaseCrawler implements Crawler {
   willNotify: boolean;
 
-  constructor(launchOpt: Args) {
-    this.willNotify = launchOpt.slack;
+  protected constructor() {
+    this.willNotify = args().slack;
   }
 
   async run(): Promise<void> {
@@ -24,7 +24,7 @@ export abstract class BaseCrawler implements Crawler {
     await this.notify(books);
   }
 
-  protected async notify(books: Book[]): Promise<void> {
+  private async notify(books: Book[]): Promise<void> {
     const message = books
       .map((b) => `[${b.title}] by ${b.author}`)
       .reduce((b1, b2) => b1 + '\n' + b2);

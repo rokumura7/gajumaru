@@ -1,12 +1,18 @@
 import { Browser } from 'puppeteer';
 import GajumaruPage from '../../lib/puppeteer/GajumaruPage';
-import { BaseCrawler } from '../Crawler';
+import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
 import { replaceIndex as r } from '../../lib/util/Utils';
 import { Book, BookBuilder } from '../../lib/model/Book';
 import * as VOBook from '../../lib/model/vo/Book';
 
-export default class YurindoCrawler extends BaseCrawler {
+class YurindoCrawler extends BaseCrawler {
+  private constructor() {
+    super();
+  }
+
+  static build = (): Crawler => new YurindoCrawler();
+
   protected async crawl(_: Browser, page: GajumaruPage): Promise<Book[]> {
     await page
       .goto('https://www.yurindo.co.jp/ranking/week-all')
@@ -36,3 +42,5 @@ export default class YurindoCrawler extends BaseCrawler {
     return new Promise((resolve) => resolve(books));
   }
 }
+
+YurindoCrawler.build().run();
