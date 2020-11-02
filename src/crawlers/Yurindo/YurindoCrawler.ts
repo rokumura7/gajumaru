@@ -14,9 +14,7 @@ class YurindoCrawler extends BaseCrawler {
   static build = (): Crawler => new YurindoCrawler();
 
   protected async crawl(_: Browser, page: GajumaruPage): Promise<Book[]> {
-    await page
-      .goto('https://www.yurindo.co.jp/ranking/week-all')
-      .then(() => page.waitFor(1000));
+    await page.goto('https://www.yurindo.co.jp/ranking/week-all');
 
     const list = await page.$$(Selectors.RANK_LIST);
     const books: Book[] = [];
