@@ -4,6 +4,10 @@ type CrawlOption = {
   headless: boolean;
 };
 
-export const getCrawlOptions = (): CrawlOption => ({
-  headless: !args().headful,
-});
+export const getCrawlOptions = (): CrawlOption => {
+  const opt = {
+    headless: !args().headful,
+    slowMotion: args().slowMotion,
+  };
+  return opt;
+};
