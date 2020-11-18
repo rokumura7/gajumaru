@@ -2,7 +2,7 @@ import {
   NumberValueObject,
   StringValueObject,
 } from './vo/PrimitiveValueObject';
-import { fetchNum } from '../util/Utils';
+import { fetchNum } from '../utils/Utils';
 
 class Title extends StringValueObject {
   static of = (value: string): Title => new Title(value);

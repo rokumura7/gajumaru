@@ -1,6 +1,6 @@
 import puppeteer, { Browser } from 'puppeteer';
-import { Closable } from '../util/Closable';
-import { getCrawlOptions } from '../util/CrawlOptions';
+import { Closable } from '../utils/Closable';
+import { getCrawlOptions } from '../utils/CrawlOptions';
 import GajumaruPage from './GajumaruPage';
 
 class GajumaruBrowser implements Closable {

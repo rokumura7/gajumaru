@@ -1,6 +1,6 @@
 import { describe, it } from 'mocha';
 import { assert } from 'chai';
-import * as utils from '../../../src/lib/util/Utils';
+import * as utils from '../../../src/lib/utils/Utils';
 
 describe('Test for Utils.replaceIndex()', () => {
   it('replaceIndex() can replace _INDEX to ${index}', () =>

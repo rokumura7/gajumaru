@@ -1,6 +1,6 @@
 import { Book, BookBuilder } from '../../lib/model/Book';
 import { GajumaruBrowser, GajumaruPage } from '../../lib/puppeteer';
-import { using } from '../../lib/util/Closable';
+import { using } from '../../lib/utils/Closable';
 import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
 
