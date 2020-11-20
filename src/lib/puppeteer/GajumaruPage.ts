@@ -2,7 +2,7 @@ import { Page, Response } from 'puppeteer';
 import of from '../model/vo/Generator';
 import { wait } from '../util/Utils';
 
-interface GajumaruPage extends Page {
+interface GajumaruPage {
   elm<T>(selector: string): Promise<T>;
 }
 
