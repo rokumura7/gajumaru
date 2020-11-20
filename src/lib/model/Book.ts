@@ -3,7 +3,7 @@ import { Title, Author, Price, Publisher, ISBN } from './vo/Book';
 export interface Book {
   title: Title;
   author: Author;
-  price: Price;
+  price: Price | null;
   publisher: Publisher;
   isbn: ISBN;
 }
@@ -48,7 +48,6 @@ export class BookBuilder {
     if (
       this._title == null ||
       this._author == null ||
-      this._price == null ||
       this._publisher == null ||
       this._isbn == null
     )

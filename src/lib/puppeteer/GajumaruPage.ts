@@ -10,12 +10,13 @@ class GajumaruPage {
 
   static build = (_page: Page): GajumaruPage => new GajumaruPage(_page);
 
-  elm = async <T>(selector: string, index?: number): Promise<T> => {
+  val = async (selector: string, index?: number): Promise<string | null> => {
     if (index) selector = replaceIndex(selector, index);
-    return await this.page
-      .$eval(selector, (elm) => elm.textContent)
-      .then((v) => of(v));
+    return await this.page.$eval(selector, (elm) => elm.textContent);
   };
+
+  elm = async <T>(selector: string, index?: number): Promise<T> =>
+    await this.val(selector, index).then((v) => of(v));
 
   goto = async (url: string): Promise<Response | null> => {
     const res = await this.page.goto(url);
@@ -23,8 +24,30 @@ class GajumaruPage {
     return res;
   };
 
+  $ = async (selector: string): Promise<ElementHandle<Element> | null> =>
+    await this.page.$(selector);
+
   $$ = async (selector: string): Promise<ElementHandle<Element>[]> =>
     await this.page.$$(selector);
+
+  click = async (selector: string, index?: number): Promise<void> => {
+    if (index) selector = replaceIndex(selector, index);
+    const elm = await this.page.$(selector);
+    if (!elm) throw Error('Not found element in page: ' + selector);
+    await Promise.all([
+      elm.click(),
+      wait(),
+      this.page.waitForNavigation({ waitUntil: ['load', 'networkidle0'] }),
+    ]);
+  };
+
+  goBack = async (): Promise<void> => {
+    await Promise.all([
+      this.page.goBack(),
+      wait(),
+      this.page.waitForNavigation({ waitUntil: ['load', 'networkidle0'] }),
+    ]);
+  };
 }
 
 export default GajumaruPage;
