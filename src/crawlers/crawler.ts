@@ -1,6 +1,6 @@
 import { Book } from '../lib/model/Book';
 import { GajumaruBrowser, GajumaruPage } from '../lib/puppeteer';
-import { SlackBodyBuilder, post } from '../lib/notify/Slack';
+import { notify } from '../lib/notify/Slack';
 import { args } from '../lib/util/Args';
 import { using } from '../lib/util/Closable';
 
@@ -12,7 +12,7 @@ export abstract class BaseCrawler implements Crawler {
   willNotify: boolean;
 
   protected constructor() {
-    this.willNotify = args().slack;
+    this.willNotify = args().notify;
   }
 
   run = async (): Promise<void> => {
@@ -31,8 +31,7 @@ export abstract class BaseCrawler implements Crawler {
           .reduce((b1, b2) => b1 + '\n' + b2)
       : 'no books.';
     if (this.willNotify) {
-      const body = new SlackBodyBuilder(message);
-      await post(body);
+      await notify(message);
     } else {
       console.log(message);
     }

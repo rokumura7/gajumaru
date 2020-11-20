@@ -15,7 +15,7 @@ class YurindoCrawler extends BaseCrawler {
     _: GajumaruBrowser,
     page: GajumaruPage
   ): Promise<Book[]> => {
-    await page.goto('https://www.yurindo.co.jp/ranking/week-all');
+    await page.goto('https://www.yurindo.co.jp/ranking/week-biz');
 
     const list = await page.$$(Selectors.RANK_LIST);
     const books: Book[] = [];
