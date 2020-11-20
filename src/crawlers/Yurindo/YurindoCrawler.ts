@@ -1,5 +1,4 @@
-import GajumaruBrowser from '../../lib/puppeteer/GajumaruBrowser';
-import GajumaruPage from '../../lib/puppeteer/GajumaruPage';
+import { GajumaruBrowser, GajumaruPage } from '../../lib/puppeteer';
 import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
 import { replaceIndex as r } from '../../lib/util/Utils';

@@ -1,6 +1,5 @@
 import { Book } from '../lib/model/Book';
-import GajumaruBrowser from '../lib/puppeteer/GajumaruBrowser';
-import GajumaruPage from '../lib/puppeteer/GajumaruPage';
+import { GajumaruBrowser, GajumaruPage } from '../lib/puppeteer';
 import { SlackBodyBuilder, post } from '../lib/notify/Slack';
 import { args } from '../lib/util/Args';
 
