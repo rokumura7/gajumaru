@@ -1,9 +1,8 @@
-import puppeteer, { Browser } from 'puppeteer';
 import { Book } from '../lib/model/Book';
+import GajumaruBrowser from '../lib/puppeteer/GajumaruBrowser';
 import GajumaruPage from '../lib/puppeteer/GajumaruPage';
 import { SlackBodyBuilder, post } from '../lib/notify/Slack';
 import { args } from '../lib/util/Args';
-import { getCrawlOptions } from './CrawlOptions';
 
 export interface Crawler {
   run(): Promise<void>;
@@ -17,9 +16,8 @@ export abstract class BaseCrawler implements Crawler {
   }
 
   async run(): Promise<void> {
-    const browser = await puppeteer.launch(getCrawlOptions());
-    const _page = await browser.newPage();
-    const page = GajumaruPage.build(_page);
+    const browser = await GajumaruBrowser.build();
+    const page = await browser.newPage();
     const books = await this.crawl(browser, page);
     await browser.close();
     await this.notify(books);
@@ -38,7 +36,7 @@ export abstract class BaseCrawler implements Crawler {
   }
 
   protected abstract crawl(
-    browser: Browser,
+    browser: GajumaruBrowser,
     page: GajumaruPage
   ): Promise<Book[]>;
 }

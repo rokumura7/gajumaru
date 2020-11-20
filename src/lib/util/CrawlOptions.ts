@@ -1,4 +1,4 @@
-import { args } from '../lib/util/Args';
+import { args } from './Args';
 
 type CrawlOption = {
   headless: boolean;

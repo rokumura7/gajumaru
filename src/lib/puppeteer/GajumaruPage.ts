@@ -1,12 +1,8 @@
-import { Page, Response } from 'puppeteer';
+import { ElementHandle, Page, Response } from 'puppeteer';
 import of from '../model/vo/Generator';
 import { wait } from '../util/Utils';
 
-interface GajumaruPage {
-  elm<T>(selector: string): Promise<T>;
-}
-
-class GajumaruPage implements GajumaruPage {
+class GajumaruPage {
   private page: Page;
   private constructor(_page: Page) {
     this.page = _page;
@@ -23,6 +19,9 @@ class GajumaruPage implements GajumaruPage {
     await wait();
     return res;
   }
+
+  $$ = async (selector: string): Promise<ElementHandle<Element>[]> =>
+    await this.page.$$(selector);
 }
 
 export default GajumaruPage;
