@@ -19,7 +19,7 @@ export abstract class BaseCrawler implements Crawler {
   async run(): Promise<void> {
     const browser = await puppeteer.launch(getCrawlOptions());
     const _page = await browser.newPage();
-    const page = new GajumaruPage(_page);
+    const page = GajumaruPage.build(_page);
     const books = await this.crawl(browser, page);
     await browser.close();
     await this.notify(books);
