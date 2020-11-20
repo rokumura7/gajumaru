@@ -2,6 +2,7 @@ import { Book } from '../lib/model/Book';
 import { GajumaruBrowser, GajumaruPage } from '../lib/puppeteer';
 import { SlackBodyBuilder, post } from '../lib/notify/Slack';
 import { args } from '../lib/util/Args';
+import { using } from '../lib/util/Closable';
 
 export interface Crawler {
   run(): Promise<void>;
@@ -15,17 +16,20 @@ export abstract class BaseCrawler implements Crawler {
   }
 
   run = async (): Promise<void> => {
-    const browser = await GajumaruBrowser.build();
-    const page = await browser.newPage();
-    const books = await this.crawl(browser, page);
-    await browser.close();
+    const books = await using(
+      await GajumaruBrowser.build(),
+      async (browser) =>
+        await browser.newPage().then((page) => this.crawl(browser, page))
+    );
     await this.notify(books);
   };
 
-  private notify = async (books: Book[]): Promise<void> => {
+  private notify = async (books: Book[] | void): Promise<void> => {
     const message = books
-      .map((b) => `[${b.title}] by ${b.author}`)
-      .reduce((b1, b2) => b1 + '\n' + b2);
+      ? books
+          .map((b) => `[${b.title}] by ${b.author}`)
+          .reduce((b1, b2) => b1 + '\n' + b2)
+      : 'no books.';
     if (this.willNotify) {
       const body = new SlackBodyBuilder(message);
       await post(body);

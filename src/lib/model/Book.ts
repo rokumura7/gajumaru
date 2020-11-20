@@ -15,32 +15,36 @@ export class BookBuilder {
   private _publisher: Publisher | null = null;
   private _isbn: ISBN | null = null;
 
-  title(_title: Title): BookBuilder {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  private constructor() {}
+  static prepare = (): BookBuilder => new BookBuilder();
+
+  title = (_title: Title): BookBuilder => {
     this._title = _title;
     return this;
-  }
+  };
 
-  author(_author: Author): BookBuilder {
+  author = (_author: Author): BookBuilder => {
     this._author = _author;
     return this;
-  }
+  };
 
-  price(_price: Price): BookBuilder {
+  price = (_price: Price): BookBuilder => {
     this._price = _price;
     return this;
-  }
+  };
 
-  publisher(_publisher: Publisher): BookBuilder {
+  publisher = (_publisher: Publisher): BookBuilder => {
     this._publisher = _publisher;
     return this;
-  }
+  };
 
-  isbn(_isbn: ISBN): BookBuilder {
+  isbn = (_isbn: ISBN): BookBuilder => {
     this._isbn = _isbn;
     return this;
-  }
+  };
 
-  build(): Book {
+  build = (): Book => {
     if (
       this._title == null ||
       this._author == null ||
@@ -56,5 +60,5 @@ export class BookBuilder {
       publisher: this._publisher,
       isbn: this._isbn,
     };
-  }
+  };
 }

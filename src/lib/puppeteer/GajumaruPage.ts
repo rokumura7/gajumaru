@@ -1,6 +1,6 @@
 import { ElementHandle, Page, Response } from 'puppeteer';
 import of from '../model/vo/Generator';
-import { wait } from '../util/Utils';
+import { wait, replaceIndex } from '../util/Utils';
 
 class GajumaruPage {
   private page: Page;
@@ -10,10 +10,12 @@ class GajumaruPage {
 
   static build = (_page: Page): GajumaruPage => new GajumaruPage(_page);
 
-  elm = async <T>(selector: string): Promise<T> =>
-    await this.page
+  elm = async <T>(selector: string, index?: number): Promise<T> => {
+    if (index) selector = replaceIndex(selector, index);
+    return await this.page
       .$eval(selector, (elm) => elm.textContent)
       .then((v) => of(v));
+  };
 
   goto = async (url: string): Promise<Response | null> => {
     const res = await this.page.goto(url);
