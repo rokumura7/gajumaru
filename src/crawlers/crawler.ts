@@ -15,15 +15,15 @@ export abstract class BaseCrawler implements Crawler {
     this.willNotify = args().slack;
   }
 
-  async run(): Promise<void> {
+  run = async (): Promise<void> => {
     const browser = await GajumaruBrowser.build();
     const page = await browser.newPage();
     const books = await this.crawl(browser, page);
     await browser.close();
     await this.notify(books);
-  }
+  };
 
-  private async notify(books: Book[]): Promise<void> {
+  private notify = async (books: Book[]): Promise<void> => {
     const message = books
       .map((b) => `[${b.title}] by ${b.author}`)
       .reduce((b1, b2) => b1 + '\n' + b2);
@@ -33,7 +33,7 @@ export abstract class BaseCrawler implements Crawler {
     } else {
       console.log(message);
     }
-  }
+  };
 
   protected abstract crawl(
     browser: GajumaruBrowser,
