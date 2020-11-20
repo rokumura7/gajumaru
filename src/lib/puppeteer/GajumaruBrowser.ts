@@ -2,7 +2,7 @@ import puppeteer, { Browser } from 'puppeteer';
 import { getCrawlOptions } from '../util/CrawlOptions';
 import GajumaruPage from './GajumaruPage';
 
-class GajumaruBrowser implements GajumaruBrowser {
+class GajumaruBrowser {
   private browser: Browser;
   private constructor(_browser: Browser) {
     this.browser = _browser;
