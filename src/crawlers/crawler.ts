@@ -16,10 +16,12 @@ export abstract class BaseCrawler implements Crawler {
   }
 
   run = async (): Promise<void> => {
-    const books = await using(
-      await GajumaruBrowser.build(),
-      async (browser) =>
-        await browser.newPage().then((page) => this.crawl(browser, page))
+    const books = await GajumaruBrowser.build().then((browser) =>
+      using(
+        browser,
+        async (browser) =>
+          await browser.newPage().then((page) => this.crawl(browser, page))
+      )
     );
     await this.notify(books);
   };
