@@ -1,4 +1,27 @@
-import { Title, Author, Price, Publisher, ISBN } from './vo/Book';
+import {
+  NumberValueObject,
+  StringValueObject,
+} from './vo/PrimitiveValueObject';
+
+class Title extends StringValueObject {
+  static of = (value: string): Title => new Title(value);
+}
+
+class Publisher extends StringValueObject {
+  static of = (value: string): Publisher => new Publisher(value);
+}
+
+class Price extends NumberValueObject {
+  static of = (value: number): Price => new Price(value);
+}
+
+class ISBN extends StringValueObject {
+  static of = (value: string): ISBN => new ISBN(value);
+}
+
+class Author extends StringValueObject {
+  static of = (value: string): Author => new Author(value);
+}
 
 export interface Book {
   title: Title;
@@ -9,37 +32,37 @@ export interface Book {
 }
 
 export class BookBuilder {
-  private _title: Title | null = null;
-  private _author: Author | null = null;
-  private _price: Price | null = null;
-  private _publisher: Publisher | null = null;
-  private _isbn: ISBN | null = null;
+  private _title: string | null = null;
+  private _author: string | null = null;
+  private _price = -1;
+  private _publisher: string | null = null;
+  private _isbn: string | null = null;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
   static prepare = (): BookBuilder => new BookBuilder();
 
-  title = (_title: Title): BookBuilder => {
+  title = (_title: string): BookBuilder => {
     this._title = _title;
     return this;
   };
 
-  author = (_author: Author): BookBuilder => {
+  author = (_author: string): BookBuilder => {
     this._author = _author;
     return this;
   };
 
-  price = (_price: Price): BookBuilder => {
+  price = (_price: number): BookBuilder => {
     this._price = _price;
     return this;
   };
 
-  publisher = (_publisher: Publisher): BookBuilder => {
+  publisher = (_publisher: string): BookBuilder => {
     this._publisher = _publisher;
     return this;
   };
 
-  isbn = (_isbn: ISBN): BookBuilder => {
+  isbn = (_isbn: string): BookBuilder => {
     this._isbn = _isbn;
     return this;
   };
@@ -53,11 +76,11 @@ export class BookBuilder {
     )
       throw new Error('missing args.');
     return {
-      title: this._title,
-      author: this._author,
-      price: this._price,
-      publisher: this._publisher,
-      isbn: this._isbn,
+      title: Title.of(this._title),
+      author: Author.of(this._author),
+      price: Price.of(this._price),
+      publisher: Publisher.of(this._publisher),
+      isbn: ISBN.of(this._isbn),
     };
   };
 }
