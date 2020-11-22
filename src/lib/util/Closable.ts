@@ -5,7 +5,4 @@ export interface Closable {
 export const using = <T extends Closable, R>(
   resource: T,
   func: (resource: T) => Promise<R>
-): Promise<R | void> =>
-  func(resource)
-    .catch((e) => console.error(e))
-    .finally(() => resource.close());
+): Promise<R | void> => func(resource).finally(() => resource.close());
