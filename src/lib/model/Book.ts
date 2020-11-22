@@ -2,6 +2,7 @@ import {
   NumberValueObject,
   StringValueObject,
 } from './vo/PrimitiveValueObject';
+import { fetchNum } from '../util/Utils';
 
 class Title extends StringValueObject {
   static of = (value: string): Title => new Title(value);
@@ -52,8 +53,8 @@ export class BookBuilder {
     return this;
   };
 
-  price = (_price: number): BookBuilder => {
-    this._price = _price;
+  price = (_price: string): BookBuilder => {
+    this._price = fetchNum(_price);
     return this;
   };
 
