@@ -1,5 +1,4 @@
 import { ElementHandle, Page, Response } from 'puppeteer';
-import of from '../model/vo/Generator';
 import { Closable } from '../util/Closable';
 import { wait, replaceIndex } from '../util/Utils';
 
@@ -11,13 +10,11 @@ class GajumaruPage implements Closable {
 
   static build = (_page: Page): GajumaruPage => new GajumaruPage(_page);
 
-  val = async (selector: string, index?: number): Promise<string | null> => {
+  val = async (selector: string, index?: number): Promise<string> => {
     if (index) selector = replaceIndex(selector, index);
-    return await this.page.$eval(selector, (elm) => elm.textContent);
+    const val = await this.page.$eval(selector, (elm) => elm.textContent);
+    return val ? val : '';
   };
-
-  elm = async <T>(selector: string, index?: number): Promise<T> =>
-    await this.val(selector, index).then((v) => of(v));
 
   goto = async (url: string): Promise<Response | null> => {
     const res = await this.page.goto(url);
