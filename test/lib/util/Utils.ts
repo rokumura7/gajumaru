@@ -28,3 +28,15 @@ describe('Test for Utils.wait()', () => {
     assert.isBelow(after - before, 4000);
   });
 });
+
+describe('Test for Utils.f2h()', () => {
+  it('f2h() can replace target to half-width.', () =>
+    assert.equal(utils.f2h('Ａ１b2'), 'A1b2'));
+});
+
+describe('Test for Utils.fetchNum()', () => {
+  it('fetchNum() can fetch number', () =>
+    assert.equal(utils.fetchNum('123,456円'), 123456));
+  it('fetchNum() can replace target, and then fetch number', () =>
+    assert.equal(utils.fetchNum('１２３、４５６円'), 123456));
+});
