@@ -1,8 +1,9 @@
 import { ElementHandle, Page, Response } from 'puppeteer';
 import of from '../model/vo/Generator';
+import { Closable } from '../util/Closable';
 import { wait, replaceIndex } from '../util/Utils';
 
-class GajumaruPage {
+class GajumaruPage implements Closable {
   private page: Page;
   private constructor(_page: Page) {
     this.page = _page;

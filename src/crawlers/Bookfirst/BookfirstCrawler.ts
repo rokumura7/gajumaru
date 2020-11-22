@@ -1,6 +1,7 @@
 import { Book, BookBuilder } from '../../lib/model/Book';
 import * as vo from '../../lib/model/vo/Book';
 import { GajumaruBrowser, GajumaruPage } from '../../lib/puppeteer';
+import { using } from '../../lib/util/Closable';
 import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
 
@@ -22,7 +23,9 @@ class BookfirstCrawler extends BaseCrawler {
     for (let i = 3; i < list.length * 2 + 3 || i <= 21; i += 2) {
       await page
         .clickTargetBlank(Selectors.DETAIL_LINK, i)
-        .then((newPage) => this.crawlDetail(newPage))
+        .then((detailPage) =>
+          using(detailPage, (detailPage) => this.crawlDetail(detailPage))
+        )
         .then((book) => books.push(book));
     }
     return new Promise((resolve) => resolve(books));
@@ -34,7 +37,6 @@ class BookfirstCrawler extends BaseCrawler {
     const price = await page.elm<vo.Price>(Selectors.PRICE);
     const publisher = await page.elm<vo.Publisher>(Selectors.PUBLISHER);
     const isbn = await page.elm<vo.ISBN>(Selectors.ISBN);
-    await page.close();
     return BookBuilder.prepare()
       .title(title)
       .author(author)
