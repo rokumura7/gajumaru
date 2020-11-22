@@ -41,6 +41,22 @@ class GajumaruPage {
     ]);
   };
 
+  clickTargetBlank = async (
+    selector: string,
+    index?: number
+  ): Promise<GajumaruPage> => {
+    if (index) selector = replaceIndex(selector, index);
+    const browser = this.page.browser();
+    const [newPage] = await Promise.all([
+      browser
+        .waitForTarget((t) => t.opener() === this.page.target())
+        .then((t) => t.page()),
+      wait(),
+      this.page.click(selector),
+    ]);
+    return GajumaruPage.build(newPage);
+  };
+
   goBack = async (): Promise<void> => {
     await Promise.all([
       this.page.goBack(),
@@ -48,6 +64,8 @@ class GajumaruPage {
       this.page.waitForNavigation({ waitUntil: ['load', 'networkidle0'] }),
     ]);
   };
+
+  close = async (): Promise<void> => this.page.close();
 }
 
 export default GajumaruPage;
