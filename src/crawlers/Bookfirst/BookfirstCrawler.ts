@@ -1,5 +1,4 @@
 import { Book, BookBuilder } from '../../lib/model/Book';
-import * as vo from '../../lib/model/vo/Book';
 import { GajumaruBrowser, GajumaruPage } from '../../lib/puppeteer';
 import { using } from '../../lib/util/Closable';
 import { BaseCrawler, Crawler } from '../Crawler';
@@ -32,11 +31,11 @@ class BookfirstCrawler extends BaseCrawler {
   };
 
   private crawlDetail = async (page: GajumaruPage): Promise<Book> => {
-    const title = await page.elm<vo.Title>(Selectors.TITLE);
-    const author = await page.elm<vo.Author>(Selectors.AUTHOR);
-    const price = await page.elm<vo.Price>(Selectors.PRICE);
-    const publisher = await page.elm<vo.Publisher>(Selectors.PUBLISHER);
-    const isbn = await page.elm<vo.ISBN>(Selectors.ISBN);
+    const title = await page.val(Selectors.TITLE);
+    const author = await page.val(Selectors.AUTHOR);
+    const price = await page.val(Selectors.PRICE);
+    const publisher = await page.val(Selectors.PUBLISHER);
+    const isbn = await page.val(Selectors.ISBN);
     return BookBuilder.prepare()
       .title(title)
       .author(author)
