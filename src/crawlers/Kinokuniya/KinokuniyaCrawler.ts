@@ -21,46 +21,41 @@ class KinokuniyaCrawler extends BaseCrawler {
     const list = await page.$$(Selectors.RANK_LIST);
     const books: Book[] = [];
     for (let i = 1; i <= list.length && i <= 10; i++) {
-      await this.crawlDetail(page, i).then((book) => {
-        if (book) books.push(book);
-      });
+      await page
+        .click(Selectors.DETAIL_LINK, i)
+        .then(() => this.crawlDetail(page))
+        .then((book) => {
+          if (book) books.push(book);
+        })
+        .finally(() => page.goBack());
     }
     return new Promise((resolve) => resolve(books));
   };
 
-  private crawlDetail = async (
-    page: GajumaruPage,
-    index: number
-  ): Promise<Book | void> => {
-    try {
-      await page.click(Selectors.DETAIL_LINK, index);
-
-      const title = await page.val(Selectors.TITLE);
-      const isStopped = await page
-        .val(Selectors.STOPPED)
-        .then(
-          (val) =>
-            val === 'ただいまウェブストアではご注文を受け付けておりません。'
-        );
-      if (isStopped) {
-        console.log('Not available now: ' + title);
-        return;
-      }
-      const author = await page.val(Selectors.AUTHOR);
-      const publisher = await page.val(Selectors.PUBLISHER);
-      const price = await page.val(Selectors.PRICE);
-      const isbn = await page.val(Selectors.ISBN);
-
-      return BookBuilder.prepare()
-        .title(title)
-        .author(author)
-        .publisher(publisher)
-        .price(price)
-        .isbn(isbn)
-        .build();
-    } finally {
-      await page.goBack();
+  private crawlDetail = async (page: GajumaruPage): Promise<Book | void> => {
+    const title = await page.val(Selectors.TITLE);
+    const isStopped = await page
+      .val(Selectors.STOPPED)
+      .then(
+        (val) =>
+          val === 'ただいまウェブストアではご注文を受け付けておりません。'
+      );
+    if (isStopped) {
+      console.log('Not available now: ' + title);
+      return;
     }
+    const author = await page.val(Selectors.AUTHOR);
+    const publisher = await page.val(Selectors.PUBLISHER);
+    const price = await page.val(Selectors.PRICE);
+    const isbn = await page.val(Selectors.ISBN);
+
+    return BookBuilder.prepare()
+      .title(title)
+      .author(author)
+      .publisher(publisher)
+      .price(price)
+      .isbn(isbn)
+      .build();
   };
 }
 KinokuniyaCrawler.build().run();
