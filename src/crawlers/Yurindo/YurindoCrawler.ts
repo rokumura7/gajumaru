@@ -23,21 +23,19 @@ class YurindoCrawler extends BaseCrawler {
 
   private crawlDetail = async (
     page: GajumaruPage,
-    index: number
+    i: number
   ): Promise<Book> => {
-    const title = await page.val(Selectors.TITLE, index);
-    const author = await page.val(Selectors.AUTHOR, index);
-    const price = await page.val(Selectors.PRICE, index);
-    const publisher = await page.val(Selectors.PUBLISHER, index);
-    const isbn = await page.val(Selectors.ISBN, index);
-
-    return BookBuilder.prepare()
-      .title(title)
-      .author(author)
-      .price(price)
-      .publisher(publisher)
-      .isbn(isbn)
-      .build();
+    const builder = BookBuilder.prepare();
+    await page.val(Selectors.TITLE, i).then((title) => builder.title(title));
+    await page
+      .val(Selectors.AUTHOR, i)
+      .then((author) => builder.author(author));
+    await page.val(Selectors.PRICE, i).then((price) => builder.price(price));
+    await page
+      .val(Selectors.PUBLISHER, i)
+      .then((publisher) => builder.publisher(publisher));
+    await page.val(Selectors.ISBN, i).then((isbn) => builder.isbn(isbn));
+    return builder.build();
   };
 }
 

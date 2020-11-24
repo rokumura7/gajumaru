@@ -28,18 +28,15 @@ class BookfirstCrawler extends BaseCrawler {
   };
 
   private crawlDetail = async (page: GajumaruPage): Promise<Book> => {
-    const title = await page.val(Selectors.TITLE);
-    const author = await page.val(Selectors.AUTHOR);
-    const price = await page.val(Selectors.PRICE);
-    const publisher = await page.val(Selectors.PUBLISHER);
-    const isbn = await page.val(Selectors.ISBN);
-    return BookBuilder.prepare()
-      .title(title)
-      .author(author)
-      .price(price)
-      .publisher(publisher)
-      .isbn(isbn)
-      .build();
+    const builder = BookBuilder.prepare();
+    await page.val(Selectors.TITLE).then((title) => builder.title(title));
+    await page.val(Selectors.AUTHOR).then((author) => builder.author(author));
+    await page.val(Selectors.PRICE).then((price) => builder.price(price));
+    await page
+      .val(Selectors.PUBLISHER)
+      .then((publisher) => builder.publisher(publisher));
+    await page.val(Selectors.ISBN).then((isbn) => builder.isbn(isbn));
+    return builder.build();
   };
 }
 
