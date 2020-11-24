@@ -1,5 +1,5 @@
 import { ElementHandle, Page, Response } from 'puppeteer';
-import { Closable } from '../utils/Closable';
+import { Closable } from '../helpers/Closable';
 import { wait, replaceIndex } from '../utils/Utils';
 
 class GajumaruPage implements Closable {

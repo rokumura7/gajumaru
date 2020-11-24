@@ -1,8 +1,8 @@
 import { Book } from '../lib/model/Book';
 import { GajumaruBrowser, GajumaruPage } from '../lib/puppeteer';
 import { notify } from '../lib/notify/Slack';
-import { args } from '../lib/utils/Args';
-import { using } from '../lib/utils/Closable';
+import { args } from '../lib/launchOption/Args';
+import { using } from '../lib/helpers/Closable';
 
 export interface Crawler {
   run(): Promise<void>;
