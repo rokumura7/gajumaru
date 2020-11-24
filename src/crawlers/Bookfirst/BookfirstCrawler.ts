@@ -1,5 +1,5 @@
 import { Book, BookBuilder } from '../../lib/model/Book';
-import { GajumaruBrowser, GajumaruPage } from '../../lib/puppeteer';
+import { GajumaruPage } from '../../lib/puppeteer';
 import { using } from '../../lib/helpers/Closable';
 import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
@@ -11,10 +11,7 @@ class BookfirstCrawler extends BaseCrawler {
 
   static build = (): Crawler => new BookfirstCrawler();
 
-  protected crawl = async (
-    _: GajumaruBrowser,
-    page: GajumaruPage
-  ): Promise<Book[]> => {
+  protected crawl = async (page: GajumaruPage): Promise<Book[]> => {
     await page.goto('http://www.book1st.net/ranking/0001/0003/page1.html');
 
     const list = await page.$$(Selectors.RANK_LIST);

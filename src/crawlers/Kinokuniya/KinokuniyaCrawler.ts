@@ -1,5 +1,5 @@
 import { Book, BookBuilder } from '../../lib/model/Book';
-import { GajumaruBrowser, GajumaruPage } from '../../lib/puppeteer';
+import { GajumaruPage } from '../../lib/puppeteer';
 import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
 
@@ -10,10 +10,7 @@ class KinokuniyaCrawler extends BaseCrawler {
 
   static build = (): Crawler => new KinokuniyaCrawler();
 
-  protected crawl = async (
-    _: GajumaruBrowser,
-    page: GajumaruPage
-  ): Promise<Book[]> => {
+  protected crawl = async (page: GajumaruPage): Promise<Book[]> => {
     await page.goto(
       'https://www.kinokuniya.co.jp/disp/CKnRankingPageCList.jsp?dispNo=107002002001250&vTp=w'
     );

@@ -20,7 +20,7 @@ export abstract class BaseCrawler implements Crawler {
       using(
         browser,
         async (browser) =>
-          await browser.newPage().then((page) => this.crawl(browser, page))
+          await browser.newPage().then((page) => this.crawl(page))
       )
     );
     await this.notify(books);
@@ -39,8 +39,5 @@ export abstract class BaseCrawler implements Crawler {
     }
   };
 
-  protected abstract crawl(
-    browser: GajumaruBrowser,
-    page: GajumaruPage
-  ): Promise<Book[]>;
+  protected abstract crawl(page: GajumaruPage): Promise<Book[]>;
 }

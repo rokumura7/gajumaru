@@ -1,4 +1,4 @@
-import { GajumaruBrowser, GajumaruPage } from '../../lib/puppeteer';
+import { GajumaruPage } from '../../lib/puppeteer';
 import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
 import { Book, BookBuilder } from '../../lib/model/Book';
@@ -10,10 +10,7 @@ class YurindoCrawler extends BaseCrawler {
 
   static build = (): Crawler => new YurindoCrawler();
 
-  protected crawl = async (
-    _: GajumaruBrowser,
-    page: GajumaruPage
-  ): Promise<Book[]> => {
+  protected crawl = async (page: GajumaruPage): Promise<Book[]> => {
     await page.goto('https://www.yurindo.co.jp/ranking/week-biz');
 
     const list = await page.$$(Selectors.RANK_LIST);
