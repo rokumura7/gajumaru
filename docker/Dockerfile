@@ -1,13 +1,8 @@
-FROM ubuntu:16.04
+FROM openjdk:8
 
-RUN apt-get update
-RUN apt-get -y install openjdk-8-jdk
+ENV APP_ROOT /app
 
-VOLUME /tmp
+COPY . $APP_ROOT
+WORKDIR $APP_ROOT
 
-RUN mkdir /app
-WORKDIR /app
-
-ENV JAR_TARGET "gajumaru_api-0.0.1-SNAPSHOT.jar"
-
-ENTRYPOINT ["sh","-c","java -jar build/libs/${JAR_TARGET}"]
+ENTRYPOINT ["sh", "./gradlew", "bootRun"]

@@ -9,7 +9,6 @@ targetCompatibility = javaVersion
 apply plugin: 'war'
 
 def junitVersion = '5.2.0'
-def jacocoVersion = '0.8.1'
 def checkstyleVersion = '8.10.1'
 
 repositories {
@@ -52,14 +51,3 @@ buildscript {
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-
-def springBootApplicationName = 'gajumaru_api'
-bootJar {
-    baseName = springBootApplicationName
-    version = applicationVersion
-}
-
-bootWar {
-    baseName = springBootApplicationName
-    version = applicationVersion
-}

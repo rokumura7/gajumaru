@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   gajumaru_api:
     build:
@@ -8,8 +8,6 @@ services:
       - "8080:8080"
     volumes:
        - .:/app
-    environment:
-      JAR_TARGET: gajumaru_api-0.0.1-SNAPSHOT.jar
     depends_on:
       - gajumaru_mysql
   gajumaru_mysql:
