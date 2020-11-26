@@ -1,53 +1,38 @@
-def applicationVersion = "0.0.1-SNAPSHOT"
-version = applicationVersion
+plugins {
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'org.asciidoctor.convert' version '1.5.8'
+    id 'java'
+}
 
-apply plugin: 'java'
-def javaVersion = JavaVersion.VERSION_1_8
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = JavaVersion.VERSION_1_8
 
-apply plugin: 'war'
-
-def junitVersion = '5.2.0'
-def checkstyleVersion = '8.10.1'
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
 dependencies {
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junitVersion
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitVersion
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: junitVersion
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-devtools'
     compile group: 'org.springframework', name: 'spring-jdbc', version: '5.2.8.RELEASE'
-    compile group: 'org.flywaydb', name: 'flyway-core', version: '6.5.5'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
     useJUnitPlatform()
-    maxParallelForks = 4
 }
-
-apply plugin: 'checkstyle'
-checkstyle {
-    toolVersion = checkstyleVersion
-    configFile = file('checkstyle.xml')
-    ignoreFailures = false
-}
-
-buildscript {
-    def springBootVersion = '2.0.3.RELEASE'
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:' + springBootVersion
-    }
-}
-
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'

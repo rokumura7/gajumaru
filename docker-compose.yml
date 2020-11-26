@@ -3,13 +3,14 @@ services:
   gajumaru_api:
     build:
       context: ./
-      dockerfile: docker/Dockerfile
+      dockerfile: ./docker/Dockerfile
     ports:
       - "8080:8080"
     volumes:
        - .:/app
     depends_on:
       - gajumaru_mysql
+
   gajumaru_mysql:
     build: ./docker/mysql
     container_name: gajumaru_mysql
