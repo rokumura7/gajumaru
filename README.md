@@ -4,10 +4,11 @@
 
 ### on Docker
 
-`gradle bootJar`
-
-`docker-compose up`
+```console
+docker-compose build
+docker-compose up
+```
 
 ### on Local
 
-`gradle bootRun`
+`./gradlew bootRun`
