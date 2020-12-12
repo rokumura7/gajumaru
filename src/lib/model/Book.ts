@@ -76,6 +76,7 @@ export class BookBuilder {
       this._isbn == null
     )
       throw new Error('missing args.');
+    if (!this._price) this._price = Price.of(-1);
     return {
       title: this._title,
       author: this._author,
