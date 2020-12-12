@@ -27,44 +27,44 @@ class Author extends StringValueObject {
 export interface Book {
   title: Title;
   author: Author;
-  price: Price | null;
+  price: Price;
   publisher: Publisher;
   isbn: ISBN;
 }
 
 export class BookBuilder {
-  private _title: string | null = null;
-  private _author: string | null = null;
-  private _price = -1;
-  private _publisher: string | null = null;
-  private _isbn: string | null = null;
+  private _title?: Title;
+  private _author?: Author;
+  private _price?: Price;
+  private _publisher?: Publisher;
+  private _isbn?: ISBN;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
   static prepare = (): BookBuilder => new BookBuilder();
 
   title = (_title: string): BookBuilder => {
-    this._title = _title;
+    this._title = Title.of(_title);
     return this;
   };
 
   author = (_author: string): BookBuilder => {
-    this._author = _author;
+    this._author = Author.of(_author);
     return this;
   };
 
   price = (_price: string): BookBuilder => {
-    this._price = fetchNum(_price);
+    this._price = Price.of(fetchNum(_price));
     return this;
   };
 
   publisher = (_publisher: string): BookBuilder => {
-    this._publisher = _publisher;
+    this._publisher = Publisher.of(_publisher);
     return this;
   };
 
   isbn = (_isbn: string): BookBuilder => {
-    this._isbn = _isbn;
+    this._isbn = ISBN.of(_isbn);
     return this;
   };
 
@@ -77,11 +77,11 @@ export class BookBuilder {
     )
       throw new Error('missing args.');
     return {
-      title: Title.of(this._title),
-      author: Author.of(this._author),
-      price: Price.of(this._price),
-      publisher: Publisher.of(this._publisher),
-      isbn: ISBN.of(this._isbn),
+      title: this._title,
+      author: this._author,
+      price: this._price,
+      publisher: this._publisher,
+      isbn: this._isbn,
     };
   };
 }
