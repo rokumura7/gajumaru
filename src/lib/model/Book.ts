@@ -1,7 +1,4 @@
-import {
-  NumberValueObject,
-  StringValueObject,
-} from './vo/PrimitiveValueObject';
+import { NumberValueObject, StringValueObject } from './vo/ValueObject';
 import { fetchNum } from '../utils/Utils';
 
 class Title extends StringValueObject {
