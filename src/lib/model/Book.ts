@@ -21,13 +21,13 @@ class Author extends StringValueObject {
   static of = (value: string): Author => new Author(value);
 }
 
-export interface Book {
+export type Book = {
   title: Title;
   author: Author;
   price: Price;
   publisher: Publisher;
   isbn: ISBN;
-}
+};
 
 export class BookBuilder {
   private _title?: Title;
