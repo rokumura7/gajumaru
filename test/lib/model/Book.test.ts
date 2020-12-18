@@ -31,7 +31,7 @@ describe('Model Book', () => {
     }).toThrowError();
   });
 
-  test('Missing args', () => {
+  test('Missing price', () => {
     const model = BookBuilder.prepare()
       .title('title')
       .author('author')
