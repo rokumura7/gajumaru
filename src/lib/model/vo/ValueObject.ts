@@ -10,8 +10,7 @@ abstract class ValueObject<T> {
 
 abstract class PrimitiveValueObject<T> extends ValueObject<T> {
   eq = (vo: ValueObject<T>): boolean => {
-    if (vo == null) return false;
-    if (this.clazz !== vo.clazz) return false;
+    if (this.clazz() !== vo.clazz()) return false;
     return this._value === vo.value;
   };
 }

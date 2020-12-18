@@ -9,7 +9,12 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "./src/",
+    "sourceMap": true,
+    "paths": {
+      "@/*": ["*"]
+    },
   },
   "include": [
     "src",
