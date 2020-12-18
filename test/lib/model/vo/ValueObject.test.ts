@@ -1,6 +1,11 @@
 import { Title, Publisher } from '@/lib/model/vo/Book';
 
 describe('ValueObjects Test', () => {
+  test('A.get() return val', () => {
+    const vo1 = Title.of('test');
+    expect(vo1.get()).toBe('test');
+  });
+
   test('A.eq(A) return true', () => {
     const vo1 = Title.of('test');
     const vo2 = Title.of('test');
