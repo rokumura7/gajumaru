@@ -13,7 +13,7 @@ describe('Model Book', () => {
     const expected = {
       title: Title.of('title'),
       author: Author.of('author'),
-      price: Price.of(100),
+      price: Price.of(200),
       publisher: Publisher.of('publisher'),
       isbn: ISBN.of('1234'),
     };
