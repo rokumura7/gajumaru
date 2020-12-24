@@ -1,4 +1,4 @@
-name: npm ci
+name: npm_ci
 
 on:
   push:
