@@ -1,15 +1,15 @@
 import * as utils from '@/lib/utils/Utils';
 
-// describe('Test for Utils.replaceIndex()', () => {
-//   test('replaceIndex() can replace _INDEX to ${index}', () => {
-//     const result = utils.replaceIndex('td[_INDEX]', 1);
-//     expect(result).toBe('td[1]');
-//   });
-//   test('replaceIndex() replace nothing if there are no _INDEX', () => {
-//     const result = utils.replaceIndex('td[2]', 1);
-//     expect(result).toBe('td[2]');
-//   });
-// });
+describe('Test for Utils.replaceIndex()', () => {
+  test('replaceIndex() can replace _INDEX to ${index}', () => {
+    const result = utils.replaceIndex('td[_INDEX]', 1);
+    expect(result).toBe('td[1]');
+  });
+  test('replaceIndex() replace nothing if there are no _INDEX', () => {
+    const result = utils.replaceIndex('td[2]', 1);
+    expect(result).toBe('td[2]');
+  });
+});
 
 describe('Test for Utils.wait()', () => {
   test('wait() force to wait the process for 1 sec.', async () => {
