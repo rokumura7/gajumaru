@@ -16,16 +16,16 @@ describe('Test for Utils.wait()', () => {
     const before = Date.now();
     await utils.wait();
     const after = Date.now();
-    expect(after - before).toBeGreaterThan(1000);
-    expect(after - before).toBeLessThan(2000);
+    expect(after - before).toBeGreaterThanOrEqual(1000);
+    expect(after - before).toBeLessThanOrEqual(2000);
   });
 
   test('wait(3) force to wait the process for 3 sec.', async () => {
     const before = Date.now();
     await utils.wait(3);
     const after = Date.now();
-    expect(after - before).toBeGreaterThan(3000);
-    expect(after - before).toBeLessThan(4000);
+    expect(after - before).toBeGreaterThanOrEqual(3000);
+    expect(after - before).toBeLessThanOrEqual(4000);
   });
 });
 
