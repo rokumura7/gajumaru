@@ -5,7 +5,7 @@ import { args } from '../lib/launchOption/Args';
 import { using } from '../lib/helpers/Closable';
 
 export interface Crawler {
-  run(): Promise<void>;
+  run(): Promise<Book[]>;
 }
 
 export abstract class BaseCrawler implements Crawler {
@@ -15,7 +15,7 @@ export abstract class BaseCrawler implements Crawler {
     this.willNotify = args().notify;
   }
 
-  run = async (): Promise<void> => {
+  run = async (): Promise<Book[]> => {
     const books = await GajumaruBrowser.build().then((browser) =>
       using(
         browser,
@@ -24,6 +24,7 @@ export abstract class BaseCrawler implements Crawler {
       )
     );
     await this.notify(books);
+    return books;
   };
 
   private notify = async (books: Book[] | void): Promise<void> => {
@@ -34,8 +35,6 @@ export abstract class BaseCrawler implements Crawler {
       : 'no books.';
     if (this.willNotify) {
       await notify(message);
-    } else {
-      console.log(message);
     }
   };
 

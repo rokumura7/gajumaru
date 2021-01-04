@@ -3,7 +3,7 @@ import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
 import { Book, BookBuilder } from '../../lib/model/Book';
 
-class YurindoCrawler extends BaseCrawler {
+export default class YurindoCrawler extends BaseCrawler {
   private constructor() {
     super();
   }

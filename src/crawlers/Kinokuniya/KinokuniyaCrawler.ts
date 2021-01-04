@@ -3,7 +3,7 @@ import { GajumaruPage } from '../../lib/puppeteer';
 import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
 
-class KinokuniyaCrawler extends BaseCrawler {
+export default class KinokuniyaCrawler extends BaseCrawler {
   private constructor() {
     super();
   }
