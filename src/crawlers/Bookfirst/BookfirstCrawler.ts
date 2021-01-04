@@ -4,7 +4,7 @@ import { using } from '../../lib/helpers/Closable';
 import { BaseCrawler, Crawler } from '../Crawler';
 import Selectors from './Selectors';
 
-class BookfirstCrawler extends BaseCrawler {
+export default class BookfirstCrawler extends BaseCrawler {
   private constructor() {
     super();
   }

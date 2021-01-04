@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "cov": "jest --coverage",
+    "cov": "jest --coverage test/lib",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix"
   },
@@ -53,6 +53,11 @@
     },
     "testMatch": [
       "**/test/**/*.test.ts"
+    ],
+    "collectCoverageFrom" : [
+      "src/**/*.ts",
+      "!src/crawlers/**/*.ts",
+      "!**/node_modules/**"
     ]
   }
 }
