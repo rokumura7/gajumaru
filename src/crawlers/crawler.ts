@@ -29,7 +29,7 @@ export abstract class BaseCrawler implements Crawler {
   private notify = async (books: Book[] | void): Promise<void> => {
     const message = books
       ? books
-          .map((b) => `[${b.title.value}] by ${b.author.value}`)
+          .map((b) => `[${b.title.get()}] by ${b.author.get()}`)
           .reduce((b1, b2) => b1 + '\n' + b2)
       : 'no books.';
     if (this.willNotify) {
