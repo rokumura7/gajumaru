@@ -7,5 +7,8 @@ describe('puppeteer', () => {
 
     const page = await browser.newPage();
     expect(page).toBeInstanceOf(GajumaruPage);
+
+    await page.close();
+    await browser.close();
   });
 });
