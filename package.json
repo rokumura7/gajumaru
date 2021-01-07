@@ -57,6 +57,7 @@
     "collectCoverageFrom" : [
       "src/**/*.ts",
       "!src/crawlers/**/*.ts",
+      "!src/lib/puppeteer/**/*.ts",
       "!src/mock/**/*.ts",
       "!**/node_modules/**"
     ]
