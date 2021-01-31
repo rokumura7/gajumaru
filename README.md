@@ -1,5 +1,8 @@
 # gajumaru
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/d3b04603301c8bbcaa6c/maintainability)](https://codeclimate.com/github/rokumura7/gajumaru/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d3b04603301c8bbcaa6c/test_coverage)](https://codeclimate.com/github/rokumura7/gajumaru/test_coverage)
+
 ## install
 
 `npm install`
