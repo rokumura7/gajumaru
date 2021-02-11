@@ -1,0 +1,33 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.project
+*.classpath
+.settings
+
+# Maven
+target
+
+# Build
+out
+build
+bin/*
+!lambda.ts
+
+# Other
+*.log
+*.swp
+*.bak
+
+.factorypath
+.vscode/
+
+*.csv
+*.properties
+.idea
+# Ignore Gradle project-specific cache directory
+.gradle
