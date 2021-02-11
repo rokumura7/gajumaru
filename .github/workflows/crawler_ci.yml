@@ -1,12 +1,16 @@
-name: npm_ci
+name: crawler_ci
 
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
+
+defaults:
+  run:
+    working-directory: ~/crawler
 
 jobs:
   ci:
