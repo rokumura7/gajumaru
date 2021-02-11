@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es2018", 
+    "module": "commonjs",
+    "outDir": "./target/",
+    "removeComments": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src/",
+    "sourceMap": true,
+    "paths": {
+      "@/*": ["*"]
+    },
+  },
+  "include": [
+    "src",
+    "test",
+    "node_modules/@types/puppeteer/index.d.ts"
+  ]
+}
