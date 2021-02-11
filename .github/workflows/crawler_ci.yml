@@ -10,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: ~/crawler
+    working-directory: ./crawler
 
 jobs:
   ci:
