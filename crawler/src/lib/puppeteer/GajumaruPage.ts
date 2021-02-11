@@ -1,4 +1,4 @@
-import { ElementHandle, Page, Response } from 'puppeteer';
+import { ElementHandle, Page, HTTPResponse } from 'puppeteer';
 import { Closable } from '../helpers/Closable';
 import { wait, replaceIndex } from '../utils/Utils';
 
@@ -16,7 +16,7 @@ class GajumaruPage implements Closable {
     return val ? val : '';
   };
 
-  goto = async (url: string): Promise<Response | null> => {
+  goto = async (url: string): Promise<HTTPResponse | null> => {
     const res = await this.page.goto(url);
     await wait();
     return res;
@@ -52,6 +52,7 @@ class GajumaruPage implements Closable {
       wait(),
       this.page.click(selector),
     ]);
+    if (!newPage) throw new Error('New target is null.');
     return GajumaruPage.build(newPage);
   };
 
