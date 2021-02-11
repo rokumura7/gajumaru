@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    working-directory: ./crawler
+
 jobs:
   ci:
     runs-on: ${{ matrix.os }}
@@ -33,11 +37,5 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
-        working-directory: ./crawler
-      - name: Report test-coverage to Code Climate
-        uses: paambaati/codeclimate-action@v2.7.5
-        working-directory: ./crawler
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: npm run cov
+      - name: Run test
+        run: npm test
